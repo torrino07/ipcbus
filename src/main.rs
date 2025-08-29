@@ -4,12 +4,11 @@ use std::env;
 use std::thread;
 use std::time::{Duration, SystemTime, UNIX_EPOCH};
 
-use core::sync::atomic::{AtomicU64, Ordering};
 
 // Bring your types/constants into scope
 // (If your code is in a module, adjust the paths accordingly)
 use lib::{
-    Bus, Message,
+    Bus,
     NUM_TOPICS, BITWORDS, NUM_EXCHANGES, NUM_MARKETS, NUM_SYMBOLS, NUM_CHANNELS,
 };
 
@@ -21,7 +20,7 @@ fn topic_id(exchange: usize, market: usize, symbol: usize, channel: usize) -> us
     debug_assert!(symbol < NUM_SYMBOLS);
     debug_assert!(channel < NUM_CHANNELS);
 
-    (((exchange * NUM_MARKETS + market) * NUM_SYMBOLS + symbol) * NUM_CHANNELS + channel)
+    ((exchange * NUM_MARKETS + market) * NUM_SYMBOLS + symbol) * NUM_CHANNELS + channel
 }
 
 /// Set a single bit in the subscription mask
